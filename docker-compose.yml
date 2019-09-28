@@ -87,6 +87,7 @@ services:
       context: ./client
       cache_from:
         - ${CONTAINER_REGISTRY_BASE}/client
+    container_name: api-client
     env_file:
       - ./client/.env
     volumes:
