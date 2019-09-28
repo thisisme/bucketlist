@@ -87,14 +87,18 @@ services:
       context: ./client
       cache_from:
         - ${CONTAINER_REGISTRY_BASE}/client
-    container_name: api-client
     env_file:
       - ./client/.env
     volumes:
       - ./client:/usr/src/client:rw,cached
       - /usr/src/client/node_modules
     ports:
-      - "80:3000"
+      - "80:8080"
+    environment:
+      - NODE_ENV=development
+      # one way for hot reloading ... see above for details 
+      - CHOKIDAR_USEPOLLING=true
+      - CHOKIDAR_INTERVAL=100
 
   admin:
     # Use a static website hosting service in production
